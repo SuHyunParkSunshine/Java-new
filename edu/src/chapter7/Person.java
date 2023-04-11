@@ -7,6 +7,12 @@ public class Person {
 	public Person( ) {
 		System.out.println("Person 생성자가 호출되었습니다.");
 	}
+	
+	public Person(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+	
 //	public static void main(String[] args) {
 //		
 //		Person p = new Person();

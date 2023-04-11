@@ -7,6 +7,13 @@ public class Employee extends Person {
 	public Employee( ) {
 		System.out.println("Employee 생성자가 호출되었습니다.");
 	}
+	
+	public Employee(String name, int age, String dept) {
+//		setName(name);
+//		setAge(age);
+		super(name, age);
+		this.dept = dept;
+	}
 
 	public String getDept() {
 		return dept;
