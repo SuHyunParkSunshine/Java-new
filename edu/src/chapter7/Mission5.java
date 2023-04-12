@@ -1,9 +1,9 @@
 package chapter7;
 
 public class Mission5 {
-
-	public static void main(String[] args) {
 		
+		//함수이용
+	public static void main(String[] args) {
 		int oddsum = 0;
 		int evensum = 0;
 
@@ -18,3 +18,4 @@ public class Mission5 {
 		System.out.println("총계: " + (evensum + oddsum));
 	}
 }
+
