@@ -19,6 +19,7 @@ enum Mandarin {
 		   
 		   Object o1 = Mandarin.금귤;
 		   System.out.println("hashcode = " + o1.hashCode());
+		   System.out.println("toString = " + o1.toString());
 
 	      Mandarin ma = Mandarin.한라봉;
 	      if (ma == Mandarin.한라봉)
