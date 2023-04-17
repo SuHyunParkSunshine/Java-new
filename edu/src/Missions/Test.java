@@ -12,7 +12,7 @@ public class Test {
 			reverseArr[j] = arr[i];
 
 			System.out.print(reverseArr[j]);
-			System.out.print(arr[i]);
+//			System.out.print(arr[i]);
 		}
 	}
 }

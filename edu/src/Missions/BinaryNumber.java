@@ -19,14 +19,14 @@ public class BinaryNumber {
 			// 증감식?
 			num = num / 2;
 
-			int[] arr = { remainder };
+			int[] arr = {remainder};
 			int[] reverseArr = new int[arr.length];
 
 			for (int i = arr.length - 1, j = 0; i >= 0; i--, j++) {
 				reverseArr[j] = arr[i];
-//				System.out.println(reverseArr[j]);
+//				System.out.print(reverseArr[j]);
 			}
-			System.out.println(Arrays.toString(reverseArr));
+			System.out.println(reverseArr);
 		}
 	}
 
