@@ -7,15 +7,36 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sr = new Scanner(System.in);
 
-		int H = sr.nextInt();
-		int M = sr.nextInt();
-		int minus = sr.nextInt();
-		int sum = 0;
-		int subSum = 0;
+		int fdice = sr.nextInt();
+		int sdice = sr.nextInt();
+		int tdice = sr.nextInt();
+		int rewards = 0;
+		int [] arr = {fdice, sdice, tdice};		
 		
-		H = H * 60;
-		sum = H + M;
-		subSum = sum - minus;
+		int max = arr[0];
+		
+		for(int num : arr) {
+			if(num >  max) {
+				max = num;
+			}
+		}
+		
+		if( fdice == sdice && sdice == tdice && tdice == fdice) {
+			rewards = 10000 + (fdice * 1000);
+		}
+		else if( fdice == sdice && sdice != tdice && tdice != fdice) {
+			rewards = 1000 +(fdice * 100);
+		}
+		else if( fdice != sdice && sdice == tdice && tdice != fdice) {
+			rewards = 1000 +(sdice * 100);
+		}
+		else if( fdice != sdice && sdice != tdice && tdice == fdice) {
+			rewards = 1000 +(tdice * 100);
+		}
+		else {
+			rewards = max * 100;
+		}
+		System.out.println(rewards);
 		
 		sr.close();
 	}
