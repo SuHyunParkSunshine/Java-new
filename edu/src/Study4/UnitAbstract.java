@@ -1,5 +1,7 @@
 package Study4; //Unit interface랑 같은 것!!
 
+//abstract Class는 new로 생성자를 생성할 수 없다.
+
 public abstract class UnitAbstract {
 
 	abstract void run();
