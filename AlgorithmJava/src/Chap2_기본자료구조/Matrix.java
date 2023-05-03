@@ -32,6 +32,8 @@ public class Matrix {
 		}
 		return A2;
 	}
+	
+
 
 	public static void main(String[] args) {
 		int [][] A = new int[2][3];
