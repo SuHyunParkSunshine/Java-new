@@ -1,6 +1,5 @@
 package Chap2_기본자료구조;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Matrix {
