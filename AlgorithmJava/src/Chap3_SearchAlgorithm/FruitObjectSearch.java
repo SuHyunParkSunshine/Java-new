@@ -37,22 +37,29 @@ public class FruitObjectSearch {
 		}
 	}
 
-	Comparator<Fruit> cc_price = new Comparator<Fruit>() {
+	Comparator<Fruit> cc_name = new Comparator<Fruit>() {// 익명클래스 사용
+
+		@Override
+		public int compare(Fruit f1, Fruit f2) {
+			return (f1.name.compareTo(f2.name));
+		}
+	};
+
+	static Comparator<Fruit> cc_price = new Comparator<Fruit>() {
 
 		@Override
 		public int compare(Fruit f1, Fruit f2) {
 			return f1.price - f2.price;
-		} // 익명클래스 사용
+		}
 
 	};
 
 	private static void sortData(Fruit[] arr, Comparator<Fruit> cc_price) {
 		
-		for(int i = 0; i < arr.length; i++) {
-			
-		}
-
+		Arrays.sort(arr, cc_price);
+		
 	}
+	
 
 	private static int binarySearch(Fruit[] arr, Fruit newFruit, Comparator<Fruit> cc_name) {
 		// TODO Auto-generated method stub
@@ -82,14 +89,6 @@ public class FruitObjectSearch {
 		System.out.println("comparator 정렬(이름)후 객체 배열: ");
 		showData(arr);
 
-//		Comparator<Fruit> cc_name = new Comparator<Fruit>() {// 익명클래스 사용
-//
-//			@Override
-//			public int compare(Fruit f1, Fruit f2) {
-//				return (f1.name.compareTo(f2.name));
-//			}
-//		};
-//
 //		Fruit newFruit = new Fruit("체리", 500, "2023-5-18");
 //		int result3 = Arrays.binarySearch(arr, newFruit, cc_name);
 //
@@ -97,10 +96,9 @@ public class FruitObjectSearch {
 //		result3 = binarySearch(arr, newFruit, cc_name);
 //
 //		System.out.println("\nbinarySearch() 조회결과::" + result3);
-//		sortData(arr, cc_price);
-//
-//		System.out.println("comparator 정렬(가격)후 객체 배열: ");
-//		showData(arr);
+		sortData(arr, cc_price);
+		System.out.println("comparator 정렬(가격)후 객체 배열: ");
+		showData(arr);
 //
 //		result3 = Arrays.binarySearch(arr, newFruit, cc_price);
 //		System.out.println("\nArrays.binarySearch() 조회결과::" + result3);
