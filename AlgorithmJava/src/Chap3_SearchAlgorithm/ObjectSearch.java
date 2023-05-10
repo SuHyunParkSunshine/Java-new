@@ -18,22 +18,26 @@ class PhyscData implements Comparable<PhyscData> {
 //				} else {
 //					return -1;
 //				}
+//			} else if (this.height > o.height) {
+//				return -1;
+//			} else {
+//				return 1;
 //			}
 //		} else if (this.name.compareTo(o.name) < 0) {
 //			return -1;
 //		} else {
 //			return 1;
 //		}
-//		return 0;
+//
 //	}
 
 	@Override
 	public int compareTo(PhyscData pd) {
 		int result = this.name.compareTo(pd.name);
 		if (result == 0) {
-			int hresult = this.name.compareTo(pd.name);
+			int hresult = this.height - pd.height;
 			if (this.height == pd.height) {
-				return (int) (this.vision - pd.height);
+				return (int) (this.vision - pd.vision);
 			} else
 				return hresult;
 		} else
@@ -88,14 +92,26 @@ public class ObjectSearch {
 				return i;
 			i++;
 		}
-
 	}
 
 	private static int binarySearch(PhyscData[] arr, PhyscData key) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		int pl = 0;
+		int pr = arr.length - 1;
+
+		do {
+			int pc = (pl + pr) / 2;
+			if (arr[pc].compareTo(key) == 0)
+				return pc;
+			else if (arr[pc].compareTo(key) < 0)
+				pl = pc + 1;
+			else
+				pr = pc - 1;
+		} while (pl <= pr);
+
+		return -1;
 	}
-	
+
 	public static void main(String[] args) {
 		PhyscData[] data = { new PhyscData("홍길동", 162, 0.3), new PhyscData("홍동", 164, 1.3),
 				new PhyscData("홍길", 152, 0.7), new PhyscData("김홍길동", 172, 0.3), new PhyscData("길동", 182, 0.6),
@@ -105,6 +121,7 @@ public class ObjectSearch {
 		sortData(data);
 		System.out.println("\n - 정렬 후 결과 - ");
 		showData(data);
+
 		PhyscData key = new PhyscData("길동", 167, 0.2);
 		int result = linearSearch(data, key);
 		System.out.println("\nlinearSearch(): result = " + result);
@@ -115,8 +132,7 @@ public class ObjectSearch {
 
 		int idx = Arrays.binarySearch(data, key);
 		// Arrays.binarySearch(data, key, cc); //p.125
-		System.out.println("\nArrays.binarySearch(): result = " + result);
+		System.out.println("\nArrays.binarySearch(): result = " + idx);
 	}
-
 
 }
