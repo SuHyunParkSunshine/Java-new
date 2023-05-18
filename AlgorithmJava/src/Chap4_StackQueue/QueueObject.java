@@ -70,7 +70,7 @@ class ObjectQueue {
 		num = front = rear = 0;
 	}
 
-	public int indexOf(Integer x) {
+	public int indexOf(Point x) {
 		for (int i = 0; i < num; i++)
 			if (que.get(i).equals(x)) // data.get(i) = 포인터 객체,
 				return i; // 검색 성공
