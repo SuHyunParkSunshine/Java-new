@@ -90,32 +90,10 @@ class Stack3 {
 	}
 }
 
-//class Point {
-//	private int ix;
-//	private int iy;
-//
-//	public Point(int ix, int iy) {
-//		this.ix = ix;
-//		this.iy = iy;
-//	}
-//
-//	public String toString() {
-//		return "(" + ix + ", " + iy + ")";
-//	}
-//
-//	// equal 재정의 하는 것, 지금 Object 객체를 들고와서 쓰기 땜시롱
-//	@Override
-//	public boolean equals(Object p) {
-//
-//		Point px = (Point) p;
-//		if (this.ix == px.ix && this.iy == px.iy)
-//			return true;
-//		else
-//			return false;
-//	}
-//}
-
 public class EightQueen {
+	
+	static final int qCount = 4;
+	
 	public static void SolveQueen(int[][] d) {
 		int count = 0, mode = 0;
 		int ix = 0, iy = 0;
@@ -124,7 +102,7 @@ public class EightQueen {
 		d[ix][iy] = 1;
 		count++;
 		st.push(p);
-		while (count < 8) {
+		while (count < qCount) {
 			ix++;
 			int cy = 0;
 			while (ix < d.length) {
@@ -150,11 +128,11 @@ public class EightQueen {
 	}
 
 	public static boolean checkRow(int[][] d, int crow) {
-		crow = Point.iy;
+		
 		for (int i = 0; i < d.length; i++) {
-		if(d[i][crow] ==0) return false;
+			if (d[i][crow] == 0)
+				return false;
 
-			
 		}
 
 		return true;
@@ -165,7 +143,24 @@ public class EightQueen {
 		return true;
 	}
 
-	public static boolean checkDiagSW(int[][] d, int cx, int cy) { // x++, y-- or x--, y++ where 0<= x,y <= 7
+	public static boolean checkDiagSW(int[][] d, int x, int y) { // x++, y-- or x--, y++ where 0<= x,y <= 7
+		// 배열 d에 d[cx][cy]의 SW대각선에 배치 가능하냐?
+		int cx = x, cy = y;
+
+		while (cx >= 0 && cx < d.length && cy >= 0 && cy < d.length) {
+			cx++;
+			cy--;
+			if (d[cx][cy] == 1)
+				return false;
+		}
+		cx = x;
+		cy = y;
+		while (cx >= 0 && cy < d.length && cy >= 0 && cx < d.length) {
+			cx--;
+			cy++;
+			if (d[cx][cy] == 1)
+				return false;
+		}
 
 		return true;
 	}
@@ -177,17 +172,24 @@ public class EightQueen {
 
 	public static boolean CheckMove(int[][] d, int x, int y) {// (x,y)로 이동 가능한지를 check CheckMove ->
 
-		return true;
+		if (checkRow(d, x) && checkCol(d, y))
+			return true;
+		else
+			return false;
 	}
 
-	public static boolean NextMove(int[][] d, int row, int col) {// 다음 row에 대하여 이동할 col을 조사 NextMove -> CheckMove
+	public static int NextMove(int[][] d, int row, int col) {// 다음 row에 대하여 이동할 col을 조사 NextMove -> CheckMove
 
-		return true;
+		for(int i = 0; i < d.length; i++) {
+			if(CheckMove(d, row, i))
+				return i;
+		}
+		return -1;
 	}
 
 	public static void main(String[] args) {
-		int row = 8, col = 8;
-		int[][] data = new int[8][8];
+		int row = qCount, col = qCount;
+		int[][] data = new int[qCount][qCount];
 		for (int i = 0; i < data.length; i++)
 			for (int j = 0; j < data[0].length; j++)
 				data[i][j] = 0;

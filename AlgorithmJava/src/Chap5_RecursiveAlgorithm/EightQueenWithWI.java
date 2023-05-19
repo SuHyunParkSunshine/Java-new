@@ -13,7 +13,7 @@ public class EightQueenWithWI {
 		Point p = new Point();
 		p.setRow(irow);
 		p.setCol(icol);
-		data[icol][irow] = 1;
+		data[irow][icol] = 1;
 		count++;
 		st.push(p);
 		System.out.println("push(" + p + ")");
@@ -50,6 +50,7 @@ public class EightQueenWithWI {
 				// 퀸 자리를 못 찾았으니 전에 있던 포인트를 지우고 새로 찾기 시작할거야
 				else {
 					// 전에 있던 포인트를 없애고 다시 찾겠다.
+//					if(!st.isEmpty()) {
 					p = st.pop();
 					System.out.println("pop(" + p + ")");
 					count--;
@@ -58,25 +59,90 @@ public class EightQueenWithWI {
 					// row값을 한칸 옮겨가지구 다음 값을 정해가지구 초기화해줌
 					icol = p.getCol();
 					crow = p.getRow() + 1;
+//					} else {
+//						break;
+//					}
 				}
 			}
 		}
 	}
 
-	public static boolean checkRow(int[][] data, int row) {
-		// 지정된 row값에 col을 옮겨가면서 자리를 체크
-		for (int c = 0; c < data[row].length; c++) {
-			if (data[row][c] == 1) {
+//	public static boolean checkRow(int[][] data, int row) {
+//		// 지정된 row값에 col을 옮겨가면서 자리를 체크
+//		for (int c = 0; c < data[row].length; c++) {
+//			if (data[row][c] == 1) {
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
+
+	public static boolean checkRow(int[][] data, int row, int col) {
+		
+		int r = row;
+		
+		while (true) {
+			r++;
+
+			if (r >= data.length) {
+				break;
+			}
+			// 현재 위치에 퀸이 있으면 false 값 출력
+			if (data[r][col] == 1) {
+				return false;
+			}
+		}
+		r = row;	
+
+		while (true) {
+			r--;
+
+			if (r < 0) {
+				break;
+			}
+			if (data[r][col] == 1) {
 				return false;
 			}
 		}
 		return true;
+
 	}
 
-	public static boolean checkCol(int[][] data, int col) {
+//	public static boolean checkCol(int[][] data, int col) {
+//
+//		for (int r = 0; r < data.length; r++) {
+//			if (data[r][col] == 1) {
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
 
-		for (int r = 0; r < data.length; r++) {
-			if (data[r][col] == 1) {
+	public static boolean checkCol(int[][] data, int row, int col) {
+		
+		int c = col;
+
+		while (true) {
+			c++;
+
+			if (c >= data.length) {
+				break;
+			}
+			// 현재 위치에 퀸이 있으면 false 값 출력
+			if (data[row][c] == 1) {
+				return false;
+			}
+		}
+
+		c = col;
+
+		while (true) {
+			c--;
+
+			if (c < 0) {
+				break;
+			}
+			if (data[row][c] == 1) {
 				return false;
 			}
 		}
@@ -164,7 +230,7 @@ public class EightQueenWithWI {
 
 		// 행 방향에 퀸이 있는지 확인 //열 방향에 퀸이 있는지 확인 //대각선 방향에 퀸이 있는지 확인 //대각선 방향에 퀸이 있는지 확인
 		// //현재 위치에도 있는지 없는지 확인 없어야댐 0
-		if (checkRow(data, row) == true && checkCol(data, col) == true && checkDiagSE(data, row, col) == true
+		if (checkRow(data, row, col) == true && checkCol(data, row, col) == true && checkDiagSE(data, row, col) == true
 				&& checkDiagSW(data, row, col) && data[row][col] == 0) {
 			return true;
 		}
@@ -173,9 +239,13 @@ public class EightQueenWithWI {
 
 	}
 
-	public static boolean NextMove(int[][] data, int row, int col) {// 다음 row에 대하여 이동할 col을 조사
-
-		return true;
+	public static int NextMove(int[][] data, int row, int col) {// 다음 row에 대하여 이동할 col을 조사
+		while (col < data[0].length) {
+			if (CheckMove(data, row, col))
+				return col;
+			col++;
+		}
+		return data[0].length;
 	}
 
 	public static void main(String[] args) {
@@ -186,7 +256,7 @@ public class EightQueenWithWI {
 				data[i][j] = 0;
 
 		SolveQueen(data);
-		
+
 		System.out.println();
 		for (int i = 0; i < data.length; i++) {
 			for (int j = 0; j < data[0].length; j++) {
