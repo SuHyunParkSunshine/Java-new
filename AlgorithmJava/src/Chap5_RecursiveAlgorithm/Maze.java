@@ -95,29 +95,30 @@ public class Maze {
 				int g = i + moves[d].a;
 				int h = j + moves[d].b;
 
-				if ((g == ix) && (h == iy)) { // reached exit
+				if ((g == ix - 1) && (h == iy - 1)) { // reached exit
 					System.out.println("You reached the exit");// output path
+					mark[g][h] =2;
 					return;
 
 				}
-				if ((g >= 0 && g < maze.length) && (h >= 0 && h < maze[0].length) && (maze[g][h] == 0)
+				if ((g >= 0 && g < ix) && (h >= 0 && h < iy) && (maze[g][h] == 0)
 						&& (mark[g][h] == 0)) { // new position
 
-//					temp.x = g;
-//					temp.y = h;
-//					temp.dir = d + 1;
-					mark[g][h] = 2;
+					temp.x = g;
+					temp.y = h;
+					temp.dir = d + 1;
+//					mark[g][h] = 2;
 					Items push = new Items(i, j, d + 1);
 					st.push(push);
 
-//					mark[temp.x][temp.y] = 2;
+					mark[temp.x][temp.y] = 2;
 
 					i = g;
 					j = h;
-					
+
 					d = 0;
 
-					maze[g][h] = 2;
+//					maze[g][h] = 2;
 
 				} else {
 					d++;
@@ -133,31 +134,31 @@ public class Maze {
 		int[][] mark = new int[12][15]; // 체크용, 실패했던 길을 1로 변경해야댐
 
 		int input[][] = { // 12 x 15
-				{ 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1 },
-				{ 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1 }, { 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0 },
-				{ 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 }, { 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1 },
-				{ 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1 }, { 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
-				{ 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1 }, { 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0 },
-				{ 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 }, { 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0 } };
+				{ 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1 }, 
+				{ 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1 },
+				{ 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1 }, 
+				{ 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0 },
+				{ 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 }, 
+				{ 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1 },
+				{ 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1 }, 
+				{ 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
+				{ 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1 }, 
+				{ 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0 },
+				{ 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 }, 
+				{ 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0 } 
+				};
 
 		for (int ia = 0; ia < 8; ia++)
 			moves[ia] = new Offsets(0, 0);// 배열에 offsets 객체를 치환해야 한다.
-		moves[0].a = -1;
-		moves[0].b = 0; // N
-		moves[1].a = -1;
-		moves[1].b = 1; // NE
-		moves[2].a = 0;
-		moves[2].b = 1; // E
-		moves[3].a = 1;
-		moves[3].b = 1; // SE
-		moves[4].a = 1;
-		moves[4].b = 0; // S
-		moves[5].a = 1;
-		moves[5].b = -1; // SW
-		moves[6].a = 0;
-		moves[6].b = -1; // W
-		moves[7].a = -1;
-		moves[7].b = -1; // NW
+
+		moves[0].a = -1;	moves[0].b = 0; // N
+		moves[1].a = -1;	moves[1].b = 1; // NE
+		moves[2].a = 0;		moves[2].b = 1; // E
+		moves[3].a = 1;		moves[3].b = 1; // SE
+		moves[4].a = 1;		moves[4].b = 0; // S
+		moves[5].a = 1;		moves[5].b = -1; // SW
+		moves[6].a = 0;		moves[6].b = -1; // W
+		moves[7].a = -1;	moves[7].b = -1; // NW
 		// Directions d;
 		// d = Directions.N;
 		// d = d + 1;//java는 지원안됨
@@ -205,6 +206,5 @@ public class Maze {
 			}
 			System.out.println();
 		}
-
 	}
 }

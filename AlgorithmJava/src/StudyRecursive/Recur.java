@@ -28,5 +28,6 @@ class Recur {
      int x = stdIn.nextInt();
 
      recur(x);
+     stdIn.close();
  }
 }
