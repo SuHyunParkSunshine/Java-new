@@ -51,6 +51,7 @@ public class IntStack {
 			throw new EmptyIntStackException();
 		{
 			Point p = stk.remove(ptr - 1);
+			ptr--;
 			return p;
 		}
 	}
