@@ -8,50 +8,31 @@ public class Main {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
+		StringBuilder sb = new StringBuilder();
 
-		String s;
+		Stack<Integer> stk = new Stack<>();
 
-		while (true) {
-			s = sc.nextLine();
+		int n = sc.nextInt();
 
-			if (s.equals(".")) {
-				break;
+		int start = 0;
+
+		while (n-- > 0) {
+			int value = sc.nextInt();
+
+			if (value > start) {
+				for (int i = start + 1; i <= value; i++) {
+					stk.push(i);
+					sb.append("+").append("\n");
+				}
+				start = value;
+			} else if (stk.peek() != value) {
+				System.out.println("NO");
+				return;
 			}
-			System.out.println(solve(s));
+			stk.pop();
+			sb.append("-").append("\n");
 		}
+		System.out.println(sb);
 		sc.close();
-	}
-
-	public static String solve(String str) {
-		Stack<Character> stk = new Stack<>();
-
-		for (int j = 0; j < str.length(); j++) {
-
-			char c = str.charAt(j);
-
-			if (c == '(' || c == '[') {
-				stk.push(c);
-			}
-
-			else if (c == ')') {
-				if (stk.isEmpty() || stk.peek() != '(') {
-					return "no";
-				}
-				stk.pop();
-			}
-
-			else if (c == ']') {
-				if (stk.isEmpty() || stk.peek() != '[') {
-					return "no";
-				}
-				stk.pop();
-			}
-		}
-
-		if (stk.isEmpty()) {
-			return "yes";
-		} else {
-			return "no";
-		}
 	}
 }
