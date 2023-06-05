@@ -76,14 +76,16 @@ class CircularList {
 	Node3 first;
 
 	public CircularList() { // head node
-		first = null;
+		Node3 newNode = new Node3(null);
+		newNode.link = newNode;
+		first = newNode;
 	}
 
 	public int Delete(SimpleObject3 element, Comparator<SimpleObject3> cc) // delete the element
 	{
 
-		Node3 p = first;
-		Node3 q = null;
+		Node3 p = first.link;
+		Node3 q = first;
 
 		while (p != null) {
 			if (cc.compare(element, p.data) == 0) {
@@ -103,12 +105,12 @@ class CircularList {
 	}
 
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
-		Node3 p = first;
 		// p값 출력
-		if (p == null) {
+		if (first.link == first) {
 			System.out.println("입력 정보가 없습니다");
 		}
-		while (p != null) {
+		Node3 p = first.link;
+		while (p != first) {
 			System.out.print(p.data + " ");
 			p = p.link;
 		}
@@ -117,19 +119,20 @@ class CircularList {
 	public void Add(SimpleObject3 element, Comparator<SimpleObject3> cc) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
 	{
 		Node3 nd = new Node3(element);
-		Node3 p = first, q = p;
-		if (p == null) {
-			first = nd;
+		Node3 p = first.link, q = first;
+		if (p == first) {
+			first.link = nd;
+			nd.link = p;
 			return;
 		}
 
-		while (p != null) {
+		while (p != first) {
 
 			// 맨 처음일때
 			if (cc.compare(element, p.data) < 0) {
 				if (p == first) {
 					nd.link = p; // 1번
-					first = nd; // 2번
+					first = nd; // 2번				
 					return;
 				} else {
 					nd.link = p;
@@ -155,9 +158,9 @@ class CircularList {
 
 	public boolean Search(SimpleObject3 element, Comparator<SimpleObject3> cc) { // 전체 리스트를 순서대로 출력한다.
 
-		Node3 p = first;
+		Node3 p = first.link;
 
-		while (p != null) {
+		while (p != first) {
 			if (cc.compare(element, p.data) == 0) {
 				System.out.println("검색 성공 = " + p.data.toString());
 				return true;
@@ -218,7 +221,7 @@ public class ObjectCircularList {
 			switch (menu = SelectMenu()) {
 			case Add: // 머리노드 삽입
 				data = new SimpleObject3();
-				data.scanData("입력", 3);
+				data.scanData("입력", 3); // 3이면 번호랑 이름이랑 모두 입력
 				l.Add(data, SimpleObject3.NO_ORDER);
 				break;
 			case Delete: // 머리 노드 삭제

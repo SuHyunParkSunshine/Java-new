@@ -127,7 +127,7 @@ class DoubledLinkedList2 {
     // --- 올림차순으로 정렬이 되도록 insert ---//
     public void add(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
         Node4 newNode = new Node4(obj);
-        Node4 p = first;
+        Node4 p = first;        
         while (p.rlink != first && c.compare(obj, p.rlink.data) > 0) {
             p = p.rlink;
         }

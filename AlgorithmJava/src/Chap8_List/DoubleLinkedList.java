@@ -105,8 +105,8 @@ class DoubledLinkedList2 {
 // --- 노드를 검색 ---//
 	public boolean search(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
 		Node4 p = first;
-		while(p != null) {
-			if(c.compare(obj, p.data) == 0) {
+		while (p != null) {
+			if (c.compare(obj, p.data) == 0) {
 				System.out.println("검색 성공 = " + p.data.toString());
 				return true;
 			}
@@ -117,11 +117,40 @@ class DoubledLinkedList2 {
 
 // --- 전체 노드 표시 ---//
 	public void show() {
+		Node4 p = first.rlink;
+
+		if (p == first) {
+			System.out.println("입력정보가 없습니다.");
+		}
+		while (p != first) {
+			System.out.print(p.data + " ");
+			p = p.rlink;
+		}
 
 	}
 
 // --- 올림차순으로 정렬이 되도록 insert ---//
 	public void add(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
+		Node4 nd = new Node4(obj);
+		Node4 p = first;
+		
+		if (p == null) {
+			first = nd;
+			return;
+		}
+		while (p != null) {
+			if (c.compare(obj, p.data) < 0) {
+				if (p == first) {
+					nd.rlink = p;
+					first = nd;
+					return;
+				}
+				else {
+					nd.rlink = p;
+					
+				}
+			}
+		}
 
 	}
 
